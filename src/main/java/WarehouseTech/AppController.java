@@ -1,7 +1,9 @@
 package WarehouseTech;
 
 
+import WarehouseTech.connector.TechDatabaseConnector;
 import WarehouseTech.connector.UserDatabaseConnector;
+import WarehouseTech.models.Tech;
 import WarehouseTech.models.User;
 
 import java.awt.*;
@@ -13,7 +15,7 @@ public class AppController {
 
     public void execute(String action){
         UserDatabaseConnector db = UserDatabaseConnector.getInstance();
-
+        TechDatabaseConnector dbTech = TechDatabaseConnector.getInstance();
         switch (action) {
             case "listOfUsers":
                 List<User> list = db.getAll();
@@ -33,6 +35,10 @@ public class AppController {
                 break;
             case "findUserBySurname":
                 db.findBy("surname", getSurname());
+                break;
+            case "listOfTech":
+                List<Tech> listTech = dbTech.getAll();
+                System.out.println(listTech);
                 break;
             default:
                 break;
