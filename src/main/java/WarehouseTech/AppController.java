@@ -26,7 +26,13 @@ public class AppController {
                 db.delete(getId());
                 break;
             case "findUserById":
-                db.delete(getId());
+                db.findBy("id", String.valueOf(getId()));
+                break;
+            case "findUserByEmail":
+                db.findBy("email", getEmail());
+                break;
+            case "findUserBySurname":
+                db.findBy("surname", getSurname());
                 break;
             default:
                 break;
@@ -52,6 +58,17 @@ public class AppController {
         System.out.println("id of user");
         int id = sc.nextInt();
         return id;
+    }
+
+    public static String getEmail() {
+        System.out.println("insert email");
+        String email = sc.nextLine();
+        return email;
+    }
+    public static String getSurname() {
+        System.out.println("surname");
+        String surname = sc.nextLine();
+        return surname;
     }
 }
 
