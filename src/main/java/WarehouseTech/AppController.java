@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class AppController {
     private static Scanner sc = new Scanner(System.in);
 
-    public void execute(String action){
+    public void execute(String action) {
         UserDatabaseConnector db = UserDatabaseConnector.getInstance();
         TechDatabaseConnector dbTech = TechDatabaseConnector.getInstance();
         switch (action) {
@@ -48,6 +48,13 @@ public class AppController {
             case "findTechById":
                 dbTech.insert(getNewTechToWH());
                 break;
+            case "deleteTechById":
+                if (dbTech.findById(getIdTech()).getUserId() == null) {
+                    dbTech.delete(getIdTech());
+                } else {
+                    System.out.println("Оборудование закреплено за пользователем\nНевозможно списать");
+                }
+                break;
 
             default:
                 break;
@@ -64,7 +71,7 @@ public class AppController {
         String model = sc.nextLine();
         System.out.println("date");
         String date = sc.nextLine();
-         return new Tech (type,name,model,date);
+        return new Tech(type, name, model, date);
     }
 
     public static User getNewUser() {
@@ -78,7 +85,7 @@ public class AppController {
         String role = sc.nextLine();
         System.out.println("team");
         String team = sc.nextLine();
-        return new User(surname,name,email,role,team);
+        return new User(surname, name, email, role, team);
     }
 
     public static int getId() {
@@ -92,11 +99,13 @@ public class AppController {
         String email = sc.nextLine();
         return email;
     }
+
     public static String getSurname() {
         System.out.println("surname");
         String surname = sc.nextLine();
         return surname;
     }
+
     public static int getIdTech() {
         System.out.println("id of tech");
         int id = sc.nextInt();
