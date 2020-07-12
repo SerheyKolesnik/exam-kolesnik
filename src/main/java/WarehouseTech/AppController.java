@@ -6,7 +6,6 @@ import WarehouseTech.connector.UserDatabaseConnector;
 import WarehouseTech.models.Tech;
 import WarehouseTech.models.User;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Scanner;
 
@@ -40,10 +39,29 @@ public class AppController {
                 List<Tech> listTech = dbTech.getAll();
                 System.out.println(listTech);
                 break;
+            case "TechOfUserId":
+                dbTech.findBy("id", String.valueOf(getId()));
+                break;
+            case "insertTechToWarehouse":
+                dbTech.insert(getNewTechToWH());
+                break;
+
             default:
                 break;
         }
 
+    }
+
+    public static Tech getNewTechToWH() {
+        System.out.println("type Tech");
+        String type = sc.nextLine();
+        System.out.println("name");
+        String name = sc.nextLine();
+        System.out.println("model");
+        String model = sc.nextLine();
+        System.out.println("date");
+        String date = sc.nextLine();
+         return new Tech (type,name,model,date);
     }
 
     public static User getNewUser() {
@@ -76,5 +94,6 @@ public class AppController {
         String surname = sc.nextLine();
         return surname;
     }
+
 }
 

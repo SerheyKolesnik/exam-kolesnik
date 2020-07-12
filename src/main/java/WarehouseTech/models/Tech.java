@@ -10,9 +10,10 @@ public class Tech {
     private String date;
     private String userId;
 
-    public Tech(int id,String type, String name, String model, String date) {
+    public Tech(int id, String type, String name, String model, String date) {
         this.id = id;
-        this.type = TechTypes.valueOf(type.toUpperCase()).toString();;
+        this.type = TechTypes.valueOf(type.toUpperCase()).toString();
+        ;
         this.name = name;
         this.model = model;
         this.date = date;
@@ -25,6 +26,13 @@ public class Tech {
         this.model = model;
         this.date = date;
         this.userId = userId;
+    }
+
+    public Tech(String type, String name, String model, String date) {
+        this.type = TechTypes.valueOf(type.toUpperCase()).toString();
+        this.name = name;
+        this.model = model;
+        this.date = date;
     }
 
     public int getId() {
