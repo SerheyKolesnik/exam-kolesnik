@@ -116,6 +116,49 @@ public class TechDatabaseConnector {
         }
     }
 
+    public Tech findByWH() {
+        String sql = "SELECT * FROM tech WHERE userId = null;";
+        List<User> array = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(Config.getInstance().getDbUrl());
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return new Tech(
+                        rs.getInt("id"),
+                        rs.getString("type"),
+                        rs.getString("name"),
+                        rs.getString("model"),
+                        rs.getString("date"),
+                        rs.getString("userId"));
+            } else {
+                throw new UserNotFoundException("Tech on warehouse NOT FOUND");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed connection");
+        }
+    }
+    public Tech findAtUser() {
+        String sql = "SELECT * FROM tech WHERE userId != null;";
+        List<User> array = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(Config.getInstance().getDbUrl());
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return new Tech(
+                        rs.getInt("id"),
+                        rs.getString("type"),
+                        rs.getString("name"),
+                        rs.getString("model"),
+                        rs.getString("date"),
+                        rs.getString("userId"));
+            } else {
+                throw new UserNotFoundException("Tech at user NOT FOUND");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed connection");
+        }
+    }
+
     public Tech findById(int value) {
         String sql = "SELECT * FROM tech WHERE id = ?";
         try (Connection conn = DriverManager.getConnection(Config.getInstance().getDbUrl());

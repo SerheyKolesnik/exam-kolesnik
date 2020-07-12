@@ -55,11 +55,19 @@ public class AppController {
                     System.out.println("Оборудование закреплено за пользователем\nНевозможно списать");
                 }
                 break;
+            case "findTechByTypeKeep":
+                if (getStateSelection() ==1) {
+                    dbTech.findByWH();
+                } else if (getStateSelection() ==-1){
+                    dbTech.findAtUser();
+                } else{
+                    System.out.println("Неверный выбор\n Выберите выдано или наскладе (без пробела)");
+                }
+                break;
 
             default:
                 break;
         }
-
     }
 
     public static Tech getNewTechToWH() {
@@ -110,6 +118,19 @@ public class AppController {
         System.out.println("id of tech");
         int id = sc.nextInt();
         return id;
+    }
+
+    public static int getStateSelection() {
+        System.out.println("Выберите выдано / наскладе");
+        int res=0;
+        String select = sc.nextLine();
+        if (select == "наскладе") {
+            res=1;
+        }
+        if (select == "выдано") {
+            res=-1;
+        }
+        return res;
     }
 
 }
