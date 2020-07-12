@@ -25,6 +25,9 @@ public class AppController {
             case "delete":
                 db.delete(getId());
                 break;
+            case "findUserById":
+                db.delete(getId());
+                break;
             default:
                 break;
         }

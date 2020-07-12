@@ -16,6 +16,7 @@ public class TechDatabaseConnector {
     public static TechDatabaseConnector getInstance() {
         if (instance == null) {
             instance = new TechDatabaseConnector();
+
         }
         return instance;
     }
@@ -29,7 +30,8 @@ public class TechDatabaseConnector {
     }
 
     public void createNewTable() {
-        final String sql = String.format("CREATE TABLE IF NOT EXISTS tech (" +
+        final String sql = String.format(
+                "CREATE TABLE tech (" +
                 "id INTEGER PRIMARY KEY  autoincrement," +
                 "type VARCHAR(20) NOT NULL," +
                 "name VARCHAR(20) NOT NULL," +
@@ -72,6 +74,7 @@ public class TechDatabaseConnector {
         }
         System.out.println("tech deleted = " + id);
     }
+
     public void update(Tech tech) {
         String sql = "UPDATE tech set type = ?, name =?, model = ?, date = ?, userId = ? WHERE id = ?";
         int id = Integer.valueOf(tech.getId());

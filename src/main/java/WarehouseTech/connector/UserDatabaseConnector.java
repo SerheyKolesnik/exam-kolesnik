@@ -19,7 +19,7 @@ public class UserDatabaseConnector {
         return instance;
     }
 
-    private UserDatabaseConnector() {
+    public UserDatabaseConnector() {
         try {
             createNewTable();
         } catch (Exception e) {
@@ -27,15 +27,16 @@ public class UserDatabaseConnector {
         }
     }
 
-    private void createNewTable() {
-        final String sql = "CREATE TABLE IF NOT EXISTS users ("
-                + "	id INTEGER PRIMARY KEY  autoincrement,"
-                + "	surname VARCHAR(20) NOT NULL,"
-                + "	name VARCHAR(20) NOT NULL,"
-                + "	email VARCHAR(20) NOT NULL,"
-                + "	role VARCHAR(20) NOT NULL,"
-                + "	team VARCHAR(20)"
-                + ");";
+    public void createNewTable() {
+        final String sql = String.format("CREATE TABLE users (" +
+                "id INTEGER PRIMARY KEY  autoincrement," +
+                "surname VARCHAR(20) NOT NULL," +
+                "name VARCHAR(20) NOT NULL," +
+                "email VARCHAR(20) NOT NULL," +
+                "role VARCHAR(20) NOT NULL," +
+                "team VARCHAR(20)" +
+                ");"
+        );
 
         try (Connection conn = DriverManager.getConnection(Config.getInstance().getDbUrl());
              Statement stmt = conn.createStatement()) {
