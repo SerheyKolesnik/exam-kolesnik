@@ -45,6 +45,9 @@ public class AppController {
             case "insertTechToWarehouse":
                 dbTech.insert(getNewTechToWH());
                 break;
+            case "findTechById":
+                dbTech.insert(getNewTechToWH());
+                break;
 
             default:
                 break;
@@ -93,6 +96,11 @@ public class AppController {
         System.out.println("surname");
         String surname = sc.nextLine();
         return surname;
+    }
+    public static int getIdTech() {
+        System.out.println("id of tech");
+        int id = sc.nextInt();
+        return id;
     }
 
 }
